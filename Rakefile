@@ -1,10 +1,16 @@
 #!/usr/bin/env ruby
 # -*- ruby -*-
 
+require 'rake/clean'
 require 'rake/testtask'
-Rake::TestTask.new() do |t|
-  t.pattern = "test/test_*.rb"
+
+task :default => :test
+
+task :test_all do
+  ruby 'test/cal_tests.rb'
 end
 
-desc "Run tests"
-task :default => :test
+task :test do
+  ENV['EARLY_ESCAPE'] = 'true'
+  ruby 'test/cal_tests.rb'
+end
