@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << "lib"
+
+require 'display_cal'
+
+print_month(ARGV[0], ARGV[1])
