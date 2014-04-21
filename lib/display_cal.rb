@@ -47,12 +47,31 @@ def create_title_row(month, year)
     end
 end
 
-def print_month_cal(month, year)
-  month = month.to_i
-  year = year.to_i
+def build_month(month, year)
   month_rows = []
   month_rows << create_title_row(month, year)
   month_rows << "Su Mo Tu We Th Fr Sa"
   month_rows += create_month(month, year)
+end
+
+def print_month_cal(month, year)
+  month = month.to_i
+  year = year.to_i
+  month_rows = build_month(month, year)
   month_rows.each {|row| puts "#{row}"}
+end
+
+def print_year_cal(year)
+  year = year.to_i
+  year_rows = []
+  year_rows << "                            #{year}"
+  months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  months.each {|m| year_rows << build_month(m, year)}
+  year_rows.each do |row|
+    if row.is_a? String
+      puts "#{row}"
+    else
+      row.each {|line| puts "#{line}"}
+    end
+  end
 end
