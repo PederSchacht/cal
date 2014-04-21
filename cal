@@ -3,4 +3,8 @@ $LOAD_PATH << "lib"
 
 require 'display_cal'
 
-print_month(ARGV[0], ARGV[1])
+if ARGV[1] != nil
+  print_month_cal(ARGV[0], ARGV[1])
+else
+  print_year_cal(ARGV[0])
+end
