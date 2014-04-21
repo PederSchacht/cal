@@ -24,10 +24,13 @@ def create_month(month, year)
     day_counter += 1
   end
   unless row == ""
+    until row.length == 20
+      row << " "
+    end
     created_month << "#{row}"
     rows += 1
   end
-  (6-rows).times {created_month << ""}
+  (6-rows).times {created_month << "                    "}
   return created_month
 end
 
@@ -47,16 +50,7 @@ def create_title_row(month, year)
       title_row << "      #{month_name} #{year}"
     end
   else
-    case month
-    when 9
-      title_row << "     #{month_name}"
-    when 1, 2, 10, 11, 12
-      title_row << "      #{month_name}"
-    when 3, 4, 8
-      title_row << "       #{month_name}"
-    when 5, 6, 7
-      title_row << "        #{month_name}"
-    end
+      title_row << "#{month_name}".center(20)
   end
 end
 
@@ -84,14 +78,22 @@ end
 def print_year_cal(year)
   year = year.to_i
   year_rows = []
-  year_rows << "                            #{year}"
-  months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-  months.each {|m| year_rows << build_year_month(m, year)}
-  year_rows.each do |row|
-    if row.is_a? String
-      puts "#{row}"
-    else
-      row.each {|line| puts "#{line}"}
-    end
-  end
+  (1..12).each {|m| year_rows << build_year_month(m, year)}
+  sorted_year_rows = sort_year(year_rows)
+  sorted = []
+  sorted_year_rows.each {|line| sorted << line.join("  ")}
+  puts "                            #{year}"
+  sorted.each {|line| puts "#{line}"}
+end
+
+def sort_year(year_rows)
+  sorted = []
+  sorted += year_rows[0].zip(year_rows[1],year_rows[2])
+  sorted << [""]
+  sorted += year_rows[3].zip(year_rows[4],year_rows[5])
+  sorted << [""]
+  sorted += year_rows[6].zip(year_rows[7],year_rows[8])
+  sorted << [""]
+  sorted += year_rows[9].zip(year_rows[10],year_rows[11])
+  return sorted
 end
