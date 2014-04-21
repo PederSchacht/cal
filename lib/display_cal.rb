@@ -22,14 +22,14 @@ def print_month_title(month, year)
 end
 
 def print_month(month, year)
-  month_num = month.to_i
-  year_num = year.to_i
-  print_month_title(month_num, year_num)
-  week_start = zellers(1, month_num, year_num)
+  month = month.to_i
+  year = year.to_i
+  print_month_title(month, year)
+  week_start = zellers(1, month, year)
   row = ""
   week_start.times {row << "   "}
   row_position = week_start
-  days = days_in_month(month_num, year)
+  days = days_in_month(month, year)
   day_counter = 1
   rows = 0
   days.times do
