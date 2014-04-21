@@ -35,6 +35,7 @@ def create_title_row(month, year)
   months = ["", "January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   month_name = months[month]
   title_row = ""
+  if year != nil
     case month
     when 2, 9, 11, 12
       title_row << "   #{month_name} #{year}"
@@ -45,11 +46,30 @@ def create_title_row(month, year)
     when 5
       title_row << "      #{month_name} #{year}"
     end
+  else
+    case month
+    when 9
+      title_row << "     #{month_name}"
+    when 1, 2, 10, 11, 12
+      title_row << "      #{month_name}"
+    when 3, 4, 8
+      title_row << "       #{month_name}"
+    when 5, 6, 7
+      title_row << "        #{month_name}"
+    end
+  end
 end
 
 def build_month(month, year)
   month_rows = []
   month_rows << create_title_row(month, year)
+  month_rows << "Su Mo Tu We Th Fr Sa"
+  month_rows += create_month(month, year)
+end
+
+def build_year_month(month, year)
+  month_rows = []
+  month_rows << create_title_row(month, nil)
   month_rows << "Su Mo Tu We Th Fr Sa"
   month_rows += create_month(month, year)
 end
@@ -66,7 +86,7 @@ def print_year_cal(year)
   year_rows = []
   year_rows << "                            #{year}"
   months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-  months.each {|m| year_rows << build_month(m, year)}
+  months.each {|m| year_rows << build_year_month(m, year)}
   year_rows.each do |row|
     if row.is_a? String
       puts "#{row}"
