@@ -82,8 +82,10 @@ def print_year_cal(year)
   sorted_year_rows = sort_year(year_rows)
   sorted = []
   sorted_year_rows.each {|line| sorted << line.join("  ")}
+  sorted_no_whitespace = []
+  sorted.each {|line| sorted_no_whitespace << line.rstrip}
   puts "                            #{year}"
-  sorted.each {|line| puts "#{line}"}
+  sorted_no_whitespace.each {|line| puts "#{line}"}
 end
 
 def sort_year(year_rows)
