@@ -72,7 +72,9 @@ def print_month_cal(month, year)
   month = month.to_i
   year = year.to_i
   month_rows = build_month(month, year)
-  month_rows.each {|row| puts "#{row}"}
+  month_rows_no_whitespace = []
+  month_rows.each {|line| month_rows_no_whitespace << line.rstrip}
+  month_rows_no_whitespace.each {|row| puts "#{row}"}
 end
 
 def print_year_cal(year)
