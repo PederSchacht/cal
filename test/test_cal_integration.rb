@@ -466,4 +466,40 @@ Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa
 EOS
     assert_equal expected, actual
   end
+
+  def test_integration_17_bad_input
+    actual = `./cal abcd`
+    expected = "cal: not a valid year abcd\n"
+    assert_equal expected, actual
+  end
+
+  def test_integration_18_bad_input
+    actual = `./cal 2 19xx`
+    expected = "cal: not a valid year 19xx\n"
+    assert_equal expected, actual
+  end
+
+  def test_integration_19_bad_input
+    actual = `./cal x 2000`
+    expected = "cal: x is not a valid month number (1..12)\n"
+    assert_equal expected, actual
+  end
+
+  def test_integration_20_bad_input
+    actual = `./cal 13 2014`
+    expected = "cal: 13 is not a valid month number (1..12)\n"
+    assert_equal expected, actual
+  end
+
+  def test_integration_21_bad_input
+    actual = `./cal 0`
+    expected = "cal: year '0' is not in range 1..9999\n"
+    assert_equal expected, actual
+  end
+
+  def test_integration_22_bad_input
+    actual = `./cal`
+    expected = "cal: please include arguments as positive integers either 'month year' or 'year'\n"
+    assert_equal expected, actual
+  end
 end

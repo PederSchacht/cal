@@ -10,7 +10,5 @@ def days_in_month(month, year)
     return days = 30
   when 2 # February 28 or 29 on leap years
     return days = is_leap_year?(year) ? 29 : 28
-  else
-    puts "Please type the date using numbers only."
   end
 end
